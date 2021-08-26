@@ -1,0 +1,18 @@
+.gridContainer {
+    background-color: aquamarine;
+    display: grid;
+    grid-gap: 1px;
+    border: solid;
+    border-width: 1px;
+    width: 600px;
+    height: 600px;
+}
+
+.gridBox {
+    background-color: beige;
+    margin: 0;
+}
+.gridBox:hover {
+    background-color: rgb(182, 182, 69);
+    margin: 0;
+}
