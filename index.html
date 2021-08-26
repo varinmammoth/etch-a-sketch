@@ -3,20 +3,37 @@
     <head>
         <script src="script.js" defer></script>
         <link rel="stylesheet" href="style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">  
     </head>
 
     <body>
-        <input type='color' id='colorPicker' value='#000000'>
+        <div class='optionsContainer'>
+            <h1 style='font-size: 50px; margin: 0px;'>ETCH-A-SKETCH.</h1>
+            <input type='color' id='colorPicker' value='#000000'>
+            <button id='color' class='btn'>Color</button>
+
+            <button id='rainbow' class='btn'>Rainbow</button>
+            <button id='eraser' class='btn'>Eraser</button>
+            <button id='reset' class='btn'>Reset</button>
+
+            <!-- <input type='range' min='2' max='64' value='8' step='1' id='slider'> -->
+            <div class='dimContainer'>
+                <input type='int' value='8' id='dimInput'>
+                <div id='dimDisplay'> by 8</div>
+            </div>
+            <button onClick='setDimFromInput()' class='btn'>Confirm</button>
+            <footer>
+                <p>>Made by Mammoth. August 2021.</p>
+                <p>>Github: <a target="_blank" style='color: black' href='https://github.com/varinmammoth/etch-a-sketch'>varinmammoth</a></p>
+                <p>>Second Javascript project.</p>
+            </footer>
+        </div>
+        
         <div class='gridContainer'></div>
-        <button id='color'>Color</button>
-        <button id='rainbow'>Rainbow</button>
-        <button id='eraser'>Eraser</button>
-        <button id='reset'>Reset</button>
-
-        <input type='range' min='2' max='64' value='8' step='1' id='slider'>
-        <input type='int' value='8' id='dimInput'>
-        <div id='dimDisplay'> by 8</div>
-        <button onClick='setDimFromInput()'>Confirm</button>
-
     </body>
+
+    
 </html>

@@ -75,16 +75,25 @@ resetBtn.addEventListener('click', () => reset());
 let eraserBtn = document.querySelector('#eraser');
 eraserBtn.addEventListener('click', () => {
     tool = 'eraser';
+    eraserBtn.setAttribute('class', 'btnActive');
+    colorBtn.setAttribute('class', 'btn');
+    rainbowBtn.setAttribute('class', 'btn');
 });
 
 let colorBtn = document.querySelector('#color');
 colorBtn.addEventListener('click', () => {
     tool = 'color';
+    eraserBtn.setAttribute('class', 'btn');
+    colorBtn.setAttribute('class', 'btnActive');
+    rainbowBtn.setAttribute('class', 'btn');
 });
 
 let rainbowBtn = document.querySelector('#rainbow');
 rainbowBtn.addEventListener('click', () => {
     tool = 'rainbow';
+    eraserBtn.setAttribute('class', 'btn');
+    colorBtn.setAttribute('class', 'btn');
+    rainbowBtn.setAttribute('class', 'btnActive');
 });
 
 //Pick color
@@ -92,14 +101,14 @@ colorPicker = document.querySelector('#colorPicker');
 colorPicker.addEventListener('change', (event) => {color = event.target.value;})
 
 //Pick dimension using slider and set up the grid.
-let slider = document.querySelector('#slider');
-let dimDisplay = document.querySelector('#dimDisplay');
-slider.addEventListener('change', (event) => {
-    numCol = numRow = event.target.value;
-    setUpGrid(numCol, numRow);
-    dimDisplay.textContent = ' by ' + numRow.toString(); 
-    document.querySelector('#dimInput').setAttribute('value', numCol);
-})
+// let slider = document.querySelector('#slider');
+// let dimDisplay = document.querySelector('#dimDisplay');
+// slider.addEventListener('change', (event) => {
+//     numCol = numRow = event.target.value;
+//     setUpGrid(numCol, numRow);
+//     dimDisplay.textContent = ' by ' + numRow.toString(); 
+//     document.querySelector('#dimInput').setAttribute('value', numCol);
+// })
 
 //Pick dimension using text input and set up the grid.
 function setDimFromInput() {
