@@ -1,7 +1,7 @@
 .gridContainer {
-    background-color: aquamarine;
+    background-color: beige;
     display: grid;
-    grid-gap: 1px;
+    grid-gap: 0px;
     border: solid;
     border-width: 1px;
     width: 600px;

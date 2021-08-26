@@ -1,8 +1,25 @@
 let gridContainer = document.querySelector('.gridContainer');
 
+let containerColor = 'beige';
+
 let numCol = 8;
-let numRow = 8;
+let numRow = numCol;
 let numBox = numCol * numRow;
+let color = 'black';
+let tool = 'colorTool';
+
+let sliderValue;
+
+//Pick color
+colorPicker = document.querySelector('#colorPicker');
+colorPicker.addEventListener('change', (event) => {color = event.target.value;})
+
+//Pick dimension
+slider = document.querySelector('#slider');
+slider.addEventListener('change', (event) => {
+    numCol = numRow = event.target.value;
+    setUpGrid(numCol, numRow);
+})
 
 //Add grid-template-columns and grid-template-rows style to the gridContainer.
 function setGridColRow(numCol, numRow) {
@@ -16,16 +33,15 @@ function addGridBoxes(numBox) {
         //Adds the grid to the gridContainer.
         let gridBox = document.createElement('div');
         gridBox.setAttribute('class', 'gridBox');
-        gridBox.textContent = i
         gridContainer.appendChild(gridBox);
     }
 
     //Adds functionality to the boxes.
     gridBox = document.querySelectorAll('.gridBox');
     gridBox.forEach(box => {
-        box.addEventListener('mouseover', (event) => mouseOverEvent(event));
-        box.addEventListener('mouseout', (event) => mouseOutEvent(event));
-        box.addEventListener('mousedown', (event) => mouseDownEvent(event));
+        box.addEventListener('mouseover', (event) => mouseOverEvent(event, color, tool));
+        // box.addEventListener('mouseout', (event) => mouseOutEvent(event));
+        // box.addEventListener('mousedown', (event) => mouseDownEvent(event));
     });
 }
 
@@ -36,20 +52,33 @@ function setUpGrid(numCol, numRow) {
     addGridBoxes(numBox);
 }
 
+//Box functionality functions.
+function mouseOverEvent(event, color, tool) {
+    if (tool == 'colorTool') {
+        backgroundColorStr = 'background-color: ' + color + ';';
+        event.target.setAttribute('style', backgroundColorStr);
+    }
+    else if (tool == 'eraser') {
+        backgroundColorStr = 'background-color: ' + containerColor + ';';
+        event.target.setAttribute('style', backgroundColorStr);
+    }
+    else if (tool == 'rainbow') {
+        randomColor = 'rgb(' + Math.floor(Math.random() * 255).toString() + ',' + Math.floor(Math.random() * 255).toString() + ',' + Math.floor(Math.random() * 255).toString() +')';
+        backgroundColorStr = 'background-color: ' + randomColor + ';';
+        event.target.setAttribute('style', backgroundColorStr);
+    }
+    
+}
+
+function reset() {
+    backgroundColorStr = 'background-color: ' + containerColor + ';';
+    gridBox.forEach((item), () => {
+        item.setAttribute('style', backgroundColorStr);
+    })
+}
+
+
 setUpGrid(numCol, numRow);
 
-//Box functionality functions.
-function mouseOverEvent(event) {
-    event.target.setAttribute('style', 'background-color: grey;');
-}
 
-function mouseOutEvent(event) {
-    setTimeout(() => {
-        event.target.setAttribute('style', 'background-color: beige;');
-    }, 500);
-}
-
-function mouseDownEvent(event) {
-    event.target.setAttribute('style', 'background-color: black;');
-}
 
