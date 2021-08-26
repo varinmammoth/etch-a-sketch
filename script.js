@@ -23,9 +23,9 @@ function addGridBoxes(numBox) {
     //Adds functionality to the boxes.
     gridBox = document.querySelectorAll('.gridBox');
     gridBox.forEach(box => {
-        box.addEventListener('mouseover', (box) => mouseOverEvent(box));
-        box.addEventListener('mouseout', (box) => mousOutEvent(box));
-        box.addEventListener('mousedown', (box) => mouseDownEvent(box));
+        box.addEventListener('mouseover', (event) => mouseOverEvent(event));
+        box.addEventListener('mouseout', (event) => mouseOutEvent(event));
+        box.addEventListener('mousedown', (event) => mouseDownEvent(event));
     });
 }
 
@@ -39,17 +39,17 @@ function setUpGrid(numCol, numRow) {
 setUpGrid(numCol, numRow);
 
 //Box functionality functions.
-function mouseOverEvent(box) {
-    box.setAttribute('style', 'background-color: grey;');
+function mouseOverEvent(event) {
+    event.target.setAttribute('style', 'background-color: grey;');
 }
 
-function mouseOutEvent(box) {
-    setTimeout((box) => {
-        box.setAttribute('style', 'background-color: transparent;');
+function mouseOutEvent(event) {
+    setTimeout(() => {
+        event.target.setAttribute('style', 'background-color: beige;');
     }, 500);
 }
 
-function mouseDownEvent(box) {
-    box.setAttribute('style', 'background-color: black;');
+function mouseDownEvent(event) {
+    event.target.setAttribute('style', 'background-color: black;');
 }
 
