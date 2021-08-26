@@ -6,20 +6,7 @@ let numCol = 8;
 let numRow = numCol;
 let numBox = numCol * numRow;
 let color = 'black';
-let tool = 'colorTool';
-
-let sliderValue;
-
-//Pick color
-colorPicker = document.querySelector('#colorPicker');
-colorPicker.addEventListener('change', (event) => {color = event.target.value;})
-
-//Pick dimension
-slider = document.querySelector('#slider');
-slider.addEventListener('change', (event) => {
-    numCol = numRow = event.target.value;
-    setUpGrid(numCol, numRow);
-})
+let tool = 'color';
 
 //Add grid-template-columns and grid-template-rows style to the gridContainer.
 function setGridColRow(numCol, numRow) {
@@ -54,7 +41,7 @@ function setUpGrid(numCol, numRow) {
 
 //Box functionality functions.
 function mouseOverEvent(event, color, tool) {
-    if (tool == 'colorTool') {
+    if (tool == 'color') {
         backgroundColorStr = 'background-color: ' + color + ';';
         event.target.setAttribute('style', backgroundColorStr);
     }
@@ -70,13 +57,57 @@ function mouseOverEvent(event, color, tool) {
     
 }
 
+//Resets the grid.
 function reset() {
     backgroundColorStr = 'background-color: ' + containerColor + ';';
-    gridBox.forEach((item), () => {
-        item.setAttribute('style', backgroundColorStr);
-    })
+    // gridBox.forEach(box, () => {
+    //     box.setAttribute('style', backgroundColorStr);
+    // });
+    gridBox.forEach(box => {
+        box.setAttribute('style', backgroundColorStr);
+    });
 }
 
+//Buttons
+let resetBtn = document.querySelector('#reset');
+resetBtn.addEventListener('click', () => reset());
+
+let eraserBtn = document.querySelector('#eraser');
+eraserBtn.addEventListener('click', () => {
+    tool = 'eraser';
+});
+
+let colorBtn = document.querySelector('#color');
+colorBtn.addEventListener('click', () => {
+    tool = 'color';
+});
+
+let rainbowBtn = document.querySelector('#rainbow');
+rainbowBtn.addEventListener('click', () => {
+    tool = 'rainbow';
+});
+
+//Pick color
+colorPicker = document.querySelector('#colorPicker');
+colorPicker.addEventListener('change', (event) => {color = event.target.value;})
+
+//Pick dimension using slider and set up the grid.
+let slider = document.querySelector('#slider');
+let dimDisplay = document.querySelector('#dimDisplay');
+slider.addEventListener('change', (event) => {
+    numCol = numRow = event.target.value;
+    setUpGrid(numCol, numRow);
+    dimDisplay.textContent = ' by ' + numRow.toString(); 
+    document.querySelector('#dimInput').setAttribute('value', numCol);
+})
+
+//Pick dimension using text input and set up the grid.
+function setDimFromInput() {
+    let dimInput = document.querySelector('#dimInput').value;
+    numCol = numRow = dimInput;
+    setUpGrid(numCol, numRow);
+    dimDisplay.textContent = ' by ' + numRow.toString(); 
+}
 
 setUpGrid(numCol, numRow);
 
